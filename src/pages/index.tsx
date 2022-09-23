@@ -1,11 +1,22 @@
 import type { NextPage } from "next"
 import Head from "next/head"
-import Image from "next/image"
-import styles from "../styles/Home.module.css"
+import { Button, Center, Group } from "@mantine/core"
+import { useGetApi } from "../hooks/useApi"
 
 const Home: NextPage = () => {
+  // data に /aaa のエンドポイントから取得したデータが入る。
+  // const { data, mutate, error } = useGetApi("/aaa")
+
+  // mutate でPOST、PUT、DELETE　した時に、キャッシュのデータを更新する。
+  // mutate({a:"aa",b:"bb"},false)
+
+  // error は、データ取得に失敗したときに、trueになる。
+  // if (error) {
+  //   return
+  // }
+
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>気分dish</title>
         <meta
@@ -20,6 +31,17 @@ const Home: NextPage = () => {
       <main>
         <div className='text-red-400'>aaa</div>
         <h1>気分dish</h1>
+        <Button>aaa</Button>
+
+        <Center>
+          <Button>aaa</Button>
+        </Center>
+
+        <Group>
+          <Button>aaa</Button>
+          <Button>aaa</Button>
+          <Button>aaa</Button>
+        </Group>
       </main>
 
       <footer></footer>
