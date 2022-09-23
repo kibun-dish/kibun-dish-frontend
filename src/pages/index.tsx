@@ -5,17 +5,6 @@ import { useGetApi } from "../hooks/useApi"
 import { ProposeFood } from "../components/proposeFood"
 
 const Home: NextPage = () => {
-  // data に /aaa のエンドポイントから取得したデータが入る。
-  // const { data, mutate, error } = useGetApi("/aaa")
-
-  // mutate でPOST、PUT、DELETE　した時に、キャッシュのデータを更新する。
-  // mutate({a:"aa",b:"bb"},false)
-
-  // error は、データ取得に失敗したときに、trueになる。
-  // if (error) {
-  //   return
-  // }
-
   return (
     <div>
       <Head>

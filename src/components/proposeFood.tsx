@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useCallback } from "react"
+import React, { FC, useState, useEffect, useCallback } from "react"
 import {
   Title,
   Autocomplete,
@@ -9,11 +9,12 @@ import {
   Button,
 } from "@mantine/core"
 import { formList, useForm } from "@mantine/form"
+import { Relation } from "../types/relation"
 
-/*type NowFeeling = {
-  id: number
-  name: string
-}*/
+type displayData = {
+  food: string
+  evaluation: number
+}
 
 export const ProposeFood: FC = () => {
   const pullDownDeta = ["悲しい", "嬉しい", "二日酔い", "怒り"]
@@ -24,7 +25,7 @@ export const ProposeFood: FC = () => {
     { value: "怒り", label: "怒り" },
   ]
 
-  const Relation = [
+  const relation: Relation[] = [
     {
       id: 1,
       feel_id: 1,
@@ -43,25 +44,43 @@ export const ProposeFood: FC = () => {
     },
   ]
 
-  const displayDeta = Relation.map(element => {
-    const Deta = []
-    if (element.feel.name == nowFeeling) {
-      Deta.push({
-        food: element.food.name,
-        evaluation: element.evaluation,
-      })
-    }
-    return Deta
-  })
-
-  const rows = displayDeta.map(element => (
-    <tr key={element.food}>
-      <td>{element.food}</td>
-      <td>{element.evaluation}</td>
-    </tr>
-  ))
-
   const [nowFeeling, setNowFeeling] = useState<string | null>("none")
+  const [tableData, setTableData] = useState<Relation[]>([])
+
+  const displayData = useCallback(() => {
+    // const data: displayData[] = []
+    // relation.map(element => {
+    //   if (element.feel.name == nowFeeling) {
+    //     data.push({
+    //       food: element.food.name,
+    //       evaluation: element.evaluation,
+    //     })
+    //   }
+    // })
+    const data: Relation[] = relation.filter(element => {
+      return element.feel.name == nowFeeling
+    })
+    console.log(data)
+    setTableData(data)
+  }, [nowFeeling, relation])
+
+  const onChangeFeel = useCallback(
+    (e: any) => {
+      console.log(e)
+      setNowFeeling(e)
+      displayData()
+    },
+    [displayData],
+  )
+
+  const rows = () => {
+    tableData.map(element => (
+      <tr key={element.food}>
+        <td>{element.food}</td>
+        <td>{element.evaluation}</td>
+      </tr>
+    ))
+  }
 
   return (
     <>
@@ -70,9 +89,10 @@ export const ProposeFood: FC = () => {
         label='あなたの気分を選んでください'
         placeholder='ここをクリックして選択'
         data={selectDeta}
-        onChange={e => {
-          setNowFeeling(e)
-        }}
+        // onChange={e => {
+        //   setNowFeeling(e)
+        // }}
+        onChange={e => onChangeFeel(e)}
       />
 
       <Table>
@@ -83,7 +103,12 @@ export const ProposeFood: FC = () => {
           </tr>
         </thead>
         <tbody>
-          <tr></tr>
+          {tableData.map(element => (
+            <tr key={element.food}>
+              <td>{element.food}</td>
+              <td>{element.evaluation}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </>
