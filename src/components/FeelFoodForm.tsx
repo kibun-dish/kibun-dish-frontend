@@ -15,23 +15,9 @@ import {
 } from "@mantine/core"
 import { FC, useCallback, useState } from "react"
 import { postApi } from "../utils/api"
-
-type Food = {
-  id: number
-  name: string
-}
-type Feel = {
-  id: number
-  name: string
-}
-type Relation = {
-  id: number
-  feel_id: number
-  food_id: number
-  evaluation: number
-  feel: Feel
-  food: Food
-}
+import { Feel } from "../types/feel"
+import { Food } from "../types/foo"
+import { Relation } from "../types/relation"
 
 export const FeelFoodForm: FC = () => {
   // data に /aaa のエンドポイントから取得したデータが入る。
@@ -77,10 +63,6 @@ export const FeelFoodForm: FC = () => {
     },
   ]
 
-  const [isOpenSubmitAddFeelField, setIsOpenSubmitAddFeelField] =
-    useState(false)
-  const [isOpenAddFoodField, setIsOpenAddFoodField] = useState(false)
-
   const formParams = useForm({
     initialValues: {
       feel_id: 0,
@@ -117,16 +99,14 @@ export const FeelFoodForm: FC = () => {
 
   const onSubmitAddFeel = useCallback(() => {
     console.log("onSubmitAddFeel", feelForm.values)
-    // postApi("/feel", feelForm)
-    setIsOpenSubmitAddFeelField(false)
+    // postApi("/feels", feelForm)
 
     feelForm.reset()
   }, [feelForm])
 
   const onSubmitAddFood = useCallback(() => {
     console.log("onSubmitAddFeel", foodForm.values)
-    // postApi("/food", foodForm)
-    setIsOpenAddFoodField(false)
+    // postApi("/foods", foodForm)
 
     foodForm.reset()
   }, [foodForm])
@@ -168,42 +148,32 @@ export const FeelFoodForm: FC = () => {
           <Grid.Col sm={5}>
             <Stack>
               <h2>新しい気分を追加</h2>
-              {isOpenSubmitAddFeelField ? (
-                <form onSubmit={feelForm.onSubmit(onSubmitAddFeel)}>
-                  <Grid>
-                    <Grid.Col span={8}>
-                      <TextInput {...feelForm.getInputProps("name")} />
-                    </Grid.Col>
-                    <Grid.Col span={4}>
-                      <Button type='submit'>追加</Button>
-                    </Grid.Col>
-                  </Grid>
-                </form>
-              ) : (
-                <Button onClick={() => setIsOpenSubmitAddFeelField(true)}>
-                  +
-                </Button>
-              )}
+              <form onSubmit={feelForm.onSubmit(onSubmitAddFeel)}>
+                <Grid>
+                  <Grid.Col span={8}>
+                    <TextInput {...feelForm.getInputProps("name")} />
+                  </Grid.Col>
+                  <Grid.Col span={4}>
+                    <Button type='submit'>追加</Button>
+                  </Grid.Col>
+                </Grid>
+              </form>
             </Stack>
           </Grid.Col>
 
           <Grid.Col sm={5}>
             <Stack>
               <h2>新しい食べたものを追加</h2>
-              {isOpenAddFoodField ? (
-                <form onSubmit={foodForm.onSubmit(onSubmitAddFood)}>
-                  <Grid>
-                    <Grid.Col span={8}>
-                      <TextInput {...foodForm.getInputProps("name")} />
-                    </Grid.Col>
-                    <Grid.Col span={4}>
-                      <Button type='submit'>追加</Button>
-                    </Grid.Col>
-                  </Grid>
-                </form>
-              ) : (
-                <Button onClick={() => setIsOpenAddFoodField(true)}>+</Button>
-              )}
+              <form onSubmit={foodForm.onSubmit(onSubmitAddFood)}>
+                <Grid>
+                  <Grid.Col span={8}>
+                    <TextInput {...foodForm.getInputProps("name")} />
+                  </Grid.Col>
+                  <Grid.Col span={4}>
+                    <Button type='submit'>追加</Button>
+                  </Grid.Col>
+                </Grid>
+              </form>
             </Stack>
           </Grid.Col>
         </Grid>
