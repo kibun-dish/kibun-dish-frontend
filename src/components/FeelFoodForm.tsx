@@ -12,6 +12,7 @@ import {
   Autocomplete,
 } from "@mantine/core"
 import { FC, useCallback } from "react"
+import { postApi } from "../utils/api"
 
 export const FeelFoodForm: FC = () => {
   // data に /aaa のエンドポイントから取得したデータが入る。
@@ -24,10 +25,6 @@ export const FeelFoodForm: FC = () => {
   // if (error) {
   //   return
   // }
-
-  // 欲しいエンドポイント
-  // Food, Feel, Relation をそれぞれ、全て返すGETメソッド
-  // Food の POST は、 name
 
   // FoodのGET
   const foods = [
@@ -61,7 +58,7 @@ export const FeelFoodForm: FC = () => {
     },
   ]
 
-  const form = useForm({
+  const formParams = useForm({
     initialValues: {
       feel_id: 0,
       food_id: 0,
@@ -74,42 +71,30 @@ export const FeelFoodForm: FC = () => {
   })
 
   const onSubmit = useCallback(() => {
-    console.log(form.values)
-  }, [form])
+    console.log(formParams.values)
+    postApi("/relations", formParams)
+  }, [formParams])
 
   return (
     <div>
-      <Box sx={{ maxWidth: 300 }} mx='auto'>
-        <form onSubmit={form.onSubmit(onSubmit)}>
+      <Box className='max-w-300px' mx='auto'>
+        <form onSubmit={formParams.onSubmit(onSubmit)}>
           <Stack>
             <Select
               label='今日の気分'
               placeholder='選択してください'
-              // data={[
-              //   { value: 1, label: "React" },
-              //   { value: 2, label: "Angular" },
-              //   { value: 3, label: "Svelte" },
-              //   { value: 4, label: "Vue" },
-              // ]}
               data={feels.map(feel => {
                 return { value: feel.id, label: feel.name }
               })}
-              {...form.getInputProps("feel_id")}
+              {...formParams.getInputProps("feel_id")}
             />
             <Select
               label='食べたもの'
               placeholder='選択してください'
-              // data={[
-              //   { value: 1, label: "React" },
-              //   { value: 2, label: "Angular" },
-              //   { value: 3, label: "Svelte" },
-              //   { value: 4, label: "Vue" },
-              // ]}
-
               data={foods.map(food => {
                 return { value: food.id, label: food.name }
               })}
-              {...form.getInputProps("food_id")}
+              {...formParams.getInputProps("food_id")}
             />
 
             <Group position='right' mt='md'>
