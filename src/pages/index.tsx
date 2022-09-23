@@ -19,20 +19,8 @@ const Home: NextPage = () => {
       <header></header>
 
       <main>
-        <div className='text-red-400'>aaa</div>
         <h1>気分dish</h1>
-        <Button>aaa</Button>
         <ProposeFood />
-
-        <Center>
-          <Button>aaa</Button>
-        </Center>
-
-        <Group>
-          <Button>aaa</Button>
-          <Button>aaa</Button>
-          <Button>aaa</Button>
-        </Group>
       </main>
 
       <footer></footer>
