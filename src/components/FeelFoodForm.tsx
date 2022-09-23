@@ -45,17 +45,17 @@ export const FeelFoodForm: FC = () => {
   //   return
   // }
 
-  // FoodのGET
   const foods: Food[] = [
     { id: 1, name: "うどん" },
     { id: 2, name: "カレー" },
   ]
 
-  // FeelのGET
   const feels: Feel[] = [
     { id: 1, name: "悲しい" },
     { id: 2, name: "嬉しい" },
   ]
+  // const { data: foods, mutate: foodMutate } = useGetApi("/foods")
+  // const { data: feelds, mutate: feeldMutate } = useGetApi("/feeld")
 
   // RelationのGET
   const relations: Relation[] = [
@@ -77,7 +77,8 @@ export const FeelFoodForm: FC = () => {
     },
   ]
 
-  const [isOpenAddFeelField, setIsOpenAddFeelField] = useState(false)
+  const [isOpenSubmitAddFeelField, setIsOpenSubmitAddFeelField] =
+    useState(false)
   const [isOpenAddFoodField, setIsOpenAddFoodField] = useState(false)
 
   const formParams = useForm({
@@ -110,88 +111,102 @@ export const FeelFoodForm: FC = () => {
 
   const onSubmit = useCallback(() => {
     console.log(formParams.values)
-    postApi("/relations", formParams)
+    // postApi("/relations", formParams)
     formParams.reset()
   }, [formParams])
 
-  const addFeel = useCallback(() => {
-    console.log("addFeel", feelForm.values)
-    postApi("/feel", feelForm)
-    setIsOpenAddFeelField(false)
+  const onSubmitAddFeel = useCallback(() => {
+    console.log("onSubmitAddFeel", feelForm.values)
+    // postApi("/feel", feelForm)
+    setIsOpenSubmitAddFeelField(false)
+
     feelForm.reset()
   }, [feelForm])
 
-  const addFood = useCallback(() => {
-    console.log("addFeel", foodForm.values)
-    postApi("/food", foodForm)
+  const onSubmitAddFood = useCallback(() => {
+    console.log("onSubmitAddFeel", foodForm.values)
+    // postApi("/food", foodForm)
     setIsOpenAddFoodField(false)
+
     foodForm.reset()
   }, [foodForm])
 
   return (
     <div>
-      <Box className='max-w-300px' mx='auto'>
+      <Box className='max-w-800px w-80vw' mx='auto'>
         <form onSubmit={formParams.onSubmit(onSubmit)}>
-          <Stack>
-            <Select
-              label='今日の気分'
-              placeholder='選択してください'
-              data={feels.map(feel => {
-                return { value: feel.id, label: feel.name }
-              })}
-              {...formParams.getInputProps("feel_id")}
-            />
-
-            <Select
-              label='食べたもの'
-              placeholder='選択してください'
-              data={foods.map(food => {
-                return { value: food.id, label: food.name }
-              })}
-              {...formParams.getInputProps("food_id")}
-            />
-
-            <Group position='right' mt='md'>
-              <Button type='submit'>Submit</Button>
-            </Group>
-          </Stack>
+          <Grid>
+            <Grid.Col sm={5}>
+              <Select
+                label='今日の気分'
+                placeholder='選択してください'
+                data={feels.map(feel => {
+                  return { value: feel.id, label: feel.name }
+                })}
+                {...formParams.getInputProps("feel_id")}
+              />
+            </Grid.Col>
+            <Grid.Col sm={5}>
+              <Select
+                label='食べたもの'
+                placeholder='選択してください'
+                data={foods.map(food => {
+                  return { value: food.id, label: food.name }
+                })}
+                {...formParams.getInputProps("food_id")}
+              />
+            </Grid.Col>
+            <Grid.Col sm={2}>
+              <Group position='right' mt={27}>
+                <Button type='submit'>Submit</Button>
+              </Group>
+            </Grid.Col>
+          </Grid>
         </form>
 
-        <Stack>
-          <h2>新しい感情を追加</h2>
-          {isOpenAddFeelField ? (
-            <form onSubmit={feelForm.onSubmit(addFeel)}>
-              <Grid>
-                <Grid.Col span={8}>
-                  <TextInput {...feelForm.getInputProps("name")} />
-                </Grid.Col>
-                <Grid.Col span={4}>
-                  <Button type='submit'>追加</Button>
-                </Grid.Col>
-              </Grid>
-            </form>
-          ) : (
-            <Button onClick={() => setIsOpenAddFeelField(true)}>+</Button>
-          )}
-        </Stack>
+        <Grid mt={20}>
+          <Grid.Col sm={5}>
+            <Stack>
+              <h2>新しい気分を追加</h2>
+              {isOpenSubmitAddFeelField ? (
+                <form onSubmit={feelForm.onSubmit(onSubmitAddFeel)}>
+                  <Grid>
+                    <Grid.Col span={8}>
+                      <TextInput {...feelForm.getInputProps("name")} />
+                    </Grid.Col>
+                    <Grid.Col span={4}>
+                      <Button type='submit'>追加</Button>
+                    </Grid.Col>
+                  </Grid>
+                </form>
+              ) : (
+                <Button onClick={() => setIsOpenSubmitAddFeelField(true)}>
+                  +
+                </Button>
+              )}
+            </Stack>
+          </Grid.Col>
 
-        <Stack>
-          <h2>新しい食べたものを追加</h2>
-          {isOpenAddFoodField ? (
-            <form onSubmit={foodForm.onSubmit(addFood)}>
-              <Grid>
-                <Grid.Col span={8}>
-                  <TextInput {...foodForm.getInputProps("name")} />
-                </Grid.Col>
-                <Grid.Col span={4}>
-                  <Button type='submit'>追加</Button>
-                </Grid.Col>
-              </Grid>
-            </form>
-          ) : (
-            <Button onClick={() => setIsOpenAddFoodField(true)}>+</Button>
-          )}
-        </Stack>
+          <Grid.Col sm={5}>
+            <Stack>
+              <h2>新しい食べたものを追加</h2>
+              {isOpenAddFoodField ? (
+                <form onSubmit={foodForm.onSubmit(onSubmitAddFood)}>
+                  <Grid>
+                    <Grid.Col span={8}>
+                      <TextInput {...foodForm.getInputProps("name")} />
+                    </Grid.Col>
+                    <Grid.Col span={4}>
+                      <Button type='submit'>追加</Button>
+                    </Grid.Col>
+                  </Grid>
+                </form>
+              ) : (
+                <Button onClick={() => setIsOpenAddFoodField(true)}>+</Button>
+              )}
+            </Stack>
+          </Grid.Col>
+        </Grid>
       </Box>
     </div>
   )
