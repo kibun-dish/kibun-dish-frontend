@@ -6,6 +6,7 @@ import { ProposeFood } from "../components/ProposeFood"
 import { Layout } from "../components/Layout"
 import { useState } from "react"
 import { FeelFoodForm } from "../components/FeelFoodForm"
+import { Recommend } from "../components/Recommend"
 
 type Tabs = "食前" | "食後"
 const Home: NextPage = () => {
@@ -31,12 +32,14 @@ const Home: NextPage = () => {
           食後
         </div>
       </section>
+
       <Divider />
 
       <section className='mt-10'>
         {tabs === "食前" ? (
           <div>
             <ProposeFood />
+            <Recommend />
           </div>
         ) : (
           <div>
