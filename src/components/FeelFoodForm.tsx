@@ -20,28 +20,12 @@ import { Food } from "../types/foo"
 import { Relation } from "../types/relation"
 
 export const FeelFoodForm: FC = () => {
-  // data に /aaa のエンドポイントから取得したデータが入る。
-  // const { data, mutate, error } = useGetApi("/aaa")
-
-  // mutate でPOST、PUT、DELETE　した時に、キャッシュのデータを更新する。
-  // mutate({a:"aa",b:"bb"},false)
-
-  // error は、データ取得に失敗したときに、trueになる。
-  // if (error) {
-  //   return
-  // }
-
-  const foods: Food[] = [
-    { id: 1, name: "うどん" },
-    { id: 2, name: "カレー" },
-  ]
-
-  const feels: Feel[] = [
-    { id: 1, name: "悲しい" },
-    { id: 2, name: "嬉しい" },
-  ]
-  // const { data: foods, mutate: foodMutate } = useGetApi("/foods")
-  // const { data: feelds, mutate: feeldMutate } = useGetApi("/feeld")
+  const { data: foods, mutate: foodMutate } = useGetApi<Food[]>("/food")
+  const { data: feels, mutate: feelMutate } = useGetApi<Feel[]>("/feel")
+  const { data: relations2, mutate: relationsMutate } = useGetApi("/relation")
+  // console.log({ foods })
+  // console.log(feels2)
+  // console.log(relations2)
 
   // RelationのGET
   const relations: Relation[] = [
@@ -117,24 +101,28 @@ export const FeelFoodForm: FC = () => {
         <form onSubmit={formParams.onSubmit(onSubmit)}>
           <Grid>
             <Grid.Col sm={5}>
-              <Select
-                label='今日の気分'
-                placeholder='選択してください'
-                data={feels.map(feel => {
-                  return { value: feel.id, label: feel.name }
-                })}
-                {...formParams.getInputProps("feel_id")}
-              />
+              {feels && (
+                <Select
+                  label='今日の気分'
+                  placeholder='選択してください'
+                  data={feels.map(feel => {
+                    return { value: feel.id, label: feel.name }
+                  })}
+                  {...formParams.getInputProps("feel_id")}
+                />
+              )}
             </Grid.Col>
             <Grid.Col sm={5}>
-              <Select
-                label='食べたもの'
-                placeholder='選択してください'
-                data={foods.map(food => {
-                  return { value: food.id, label: food.name }
-                })}
-                {...formParams.getInputProps("food_id")}
-              />
+              {foods && (
+                <Select
+                  label='食べたもの'
+                  placeholder='選択してください'
+                  data={foods.map(food => {
+                    return { value: food.id, label: food.name }
+                  })}
+                  {...formParams.getInputProps("food_id")}
+                />
+              )}
             </Grid.Col>
             <Grid.Col sm={2}>
               <Group position='right' mt={27}>
