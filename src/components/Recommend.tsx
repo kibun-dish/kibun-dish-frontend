@@ -64,7 +64,7 @@ export const Recommend = () => {
 
   return (
     <div className='mx-auto max-w-500px w-80vw'>
-      <Text className='m-4'>他の人はこんな食事をしています</Text>
+      <Text className='text-xl mb-4'>他の人はこんな食事をしています</Text>
 
       <Table
         striped

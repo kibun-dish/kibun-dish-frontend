@@ -3,6 +3,7 @@ import { useForm } from "@mantine/form"
 import {
   TextInput,
   Checkbox,
+  Text,
   Button,
   Group,
   Box,
@@ -100,6 +101,8 @@ export const FeelFoodForm: FC = () => {
   return (
     <div>
       <Box className='max-w-800px w-80vw' mx='auto'>
+        <Text className='text-xl mb-4'>食事の記録</Text>
+
         <form onSubmit={formParams.onSubmit(onSubmit)}>
           <Grid>
             <Grid.Col sm={4}>

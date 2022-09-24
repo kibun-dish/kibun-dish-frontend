@@ -1,8 +1,9 @@
+import { Center } from "@mantine/core"
 import React from "react"
 
 export const Youtube = () => {
   return (
-    <div>
+    <Center>
       {/* <iframe
         id='player'
         width='300'
@@ -19,6 +20,6 @@ export const Youtube = () => {
         frameBorder='0'
         allowFullScreen
       />
-    </div>
+    </Center>
   )
 }

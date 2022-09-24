@@ -113,7 +113,7 @@ export const ProposeFood: FC = () => {
 
   return (
     <div className='mx-auto max-w-800px w-80vw'>
-      <Text className='m-4 text-sky-400'>気分にあったオススメ料理</Text>
+      <Text className='mb-4 text-20px'>気分にあったオススメ料理</Text>
       <Select
         className='m-4 max-w-250px'
         label='あなたの気分を選んでください'
