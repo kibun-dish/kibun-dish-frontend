@@ -7,11 +7,13 @@ import {
   Stack,
   Group,
   Button,
+  NativeSelect,
   Text,
 } from "@mantine/core"
 import { Relation } from "../types/relation"
 import { useGetApi } from "../hooks/useApi"
 import { Feel } from "../types/feel"
+import { useForm } from "@mantine/form"
 
 export const ProposeFood: FC = () => {
   const { data: relations2, mutate: relationsMutate } =
@@ -67,6 +69,13 @@ export const ProposeFood: FC = () => {
  */
 
   const [nowFeeling, setNowFeeling] = useState<number>(0)
+
+  const nowFeeling2 = useForm({
+    initialValues: {
+      name: "",
+    },
+  })
+
   const [tableData, setTableData] = useState<Relation[]>([])
 
   const displayData = useCallback(() => {
@@ -74,7 +83,7 @@ export const ProposeFood: FC = () => {
       return
     }
     const data: Relation[] = relations2.filter(element => {
-      return element.feel.id == nowFeeling
+      return element.feel.id === Number(nowFeeling)
     })
     data.sort((first, second) => {
       if (first.evaluation > second.evaluation) {
@@ -97,16 +106,17 @@ export const ProposeFood: FC = () => {
     <div className='mx-auto max-w-800px w-80vw'>
       <Text className='mb-4 text-20px'>気分にあったオススメ料理</Text>
       {feels && (
-        <Select
-          className='m-4 max-w-250px'
-          label='あなたの気分を選んでください'
-          placeholder='ここをクリックして選択'
-          // data={selectFeeling}
-          data={feels.map(food => {
-            return { value: food.id, label: food.name }
-          })}
-          onChange={e => onChangeFeel(e)}
-        />
+        <>
+          <Select
+            className='m-4 max-w-250px'
+            label='あなたの気分を選んでください'
+            placeholder='ここをクリックして選択'
+            data={feels.map(food => {
+              return { value: String(food.id), label: food.name }
+            })}
+            onChange={e => onChangeFeel(e)}
+          />
+        </>
       )}
 
       <Table

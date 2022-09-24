@@ -17,8 +17,6 @@ export const Recommend = () => {
   const relations: Relation2[] = [
     {
       id: 1,
-      feel_id: 1,
-      food_id: 1,
       evaluation: 5,
       feel: { id: 1, name: "悲しい" },
       food: { id: 1, name: "うどん" },
@@ -26,8 +24,6 @@ export const Recommend = () => {
     },
     {
       id: 2,
-      feel_id: 6,
-      food_id: 8,
       evaluation: 5,
       feel: { id: 6, name: "悲しい" },
       food: { id: 8, name: "冷麺" },
@@ -35,8 +31,6 @@ export const Recommend = () => {
     },
     {
       id: 3,
-      feel_id: 2,
-      food_id: 2,
       evaluation: 3,
       feel: { id: 2, name: "悲しい" },
       food: { id: 2, name: "ラーメン" },
@@ -44,8 +38,6 @@ export const Recommend = () => {
     },
     {
       id: 4,
-      feel_id: 7,
-      food_id: 4,
       evaluation: 2,
       feel: { id: 7, name: "悲しい" },
       food: { id: 4, name: "パスタ" },
@@ -53,8 +45,6 @@ export const Recommend = () => {
     },
     {
       id: 5,
-      feel_id: 9,
-      food_id: 10,
       evaluation: 9,
       feel: { id: 9, name: "嬉しい" },
       food: { id: 10, name: "タピオカ" },
