@@ -11,8 +11,10 @@ import {
   Text,
 } from "@mantine/core"
 
+type Relation2 = Relation & { num: number }
+
 export const Recommend = () => {
-  const relations: Relation[] = [
+  const relations: Relation2[] = [
     {
       id: 1,
       feel_id: 1,
@@ -20,6 +22,7 @@ export const Recommend = () => {
       evaluation: 5,
       feel: { id: 1, name: "悲しい" },
       food: { id: 1, name: "うどん" },
+      num: 10,
     },
     {
       id: 2,
@@ -28,6 +31,7 @@ export const Recommend = () => {
       evaluation: 5,
       feel: { id: 6, name: "悲しい" },
       food: { id: 8, name: "冷麺" },
+      num: 5,
     },
     {
       id: 3,
@@ -36,6 +40,7 @@ export const Recommend = () => {
       evaluation: 3,
       feel: { id: 2, name: "悲しい" },
       food: { id: 2, name: "ラーメン" },
+      num: 6,
     },
     {
       id: 4,
@@ -44,6 +49,7 @@ export const Recommend = () => {
       evaluation: 2,
       feel: { id: 7, name: "悲しい" },
       food: { id: 4, name: "パスタ" },
+      num: 3,
     },
     {
       id: 5,
@@ -52,11 +58,12 @@ export const Recommend = () => {
       evaluation: 9,
       feel: { id: 9, name: "嬉しい" },
       food: { id: 10, name: "タピオカ" },
+      num: 1,
     },
   ]
 
   return (
-    <div className='mx-auto max-w-800px w-80vw'>
+    <div className='mx-auto max-w-500px w-80vw'>
       <Text className='m-4'>他の人はこんな食事をしています</Text>
 
       <Table
@@ -66,6 +73,7 @@ export const Recommend = () => {
         <thead>
           <tr>
             <th>食べ物</th>
+            <th>人数</th>
             <th>評価</th>
           </tr>
         </thead>
@@ -75,6 +83,7 @@ export const Recommend = () => {
             <tr key={element.id}>
               <td>{element.food.name}</td>
               <td>{element.evaluation}</td>
+              <td>{element.num}</td>
             </tr>
           ))}
         </tbody>
