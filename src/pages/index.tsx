@@ -40,10 +40,12 @@ const Home: NextPage = () => {
         {tabs === "食前" ? (
           <div>
             <ProposeFood />
-            <div className='md:(flex items-end) '>
-              <Recommend />
-              <Youtube />
-            </div>
+            <Center>
+              <div className='md:(flex justify-between items-end) '>
+                <Recommend />
+                <Youtube />
+              </div>
+            </Center>
           </div>
         ) : (
           <div>
