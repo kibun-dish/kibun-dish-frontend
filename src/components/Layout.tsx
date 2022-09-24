@@ -15,7 +15,8 @@ export const Layout: FC<Props> = ({ children }) => {
           name='description'
           content='気分・状態で料理をオススメするサービス'
         />
-        <link rel='icon' href='/favicon.ico' />
+        {/* <link rel='icon' href='/favicon.ico' /> */}
+        <link rel='icon' href='/kibun-dish-logo.png' />
       </Head>
 
       <header className='bg-blue-500 shadow-lg w-full py-2 top-0 z-100 duration-300 group fixed hover:bg-red-500'>
