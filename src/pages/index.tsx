@@ -1,6 +1,8 @@
 import type { NextPage } from "next"
 import Head from "next/head"
 import { Button, Center, Group } from "@mantine/core"
+import { useGetApi } from "../hooks/useApi"
+import { ProposeFood } from "../components/ProposeFood"
 
 const Home: NextPage = () => {
   return (
@@ -8,19 +10,8 @@ const Home: NextPage = () => {
       <header></header>
 
       <main>
-        <div className='text-red-400'>aaa</div>
         <h1>気分dish</h1>
-        <Button>aaa</Button>
-
-        <Center>
-          <Button>aaa</Button>
-        </Center>
-
-        <Group>
-          <Button>aaa</Button>
-          <Button>aaa</Button>
-          <Button>aaa</Button>
-        </Group>
+        <ProposeFood />
       </main>
 
       <footer></footer>
