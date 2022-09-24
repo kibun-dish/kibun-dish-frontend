@@ -83,15 +83,12 @@ export const ProposeFood: FC = () => {
       } else return 0
     })
     setTableData(data)
-  }, [nowFeeling])
+  }, [nowFeeling, relations2])
 
-  const onChangeFeel = useCallback(
-    (e: any) => {
-      console.log(e)
-      setNowFeeling(e)
-    },
-    [displayData],
-  )
+  const onChangeFeel = useCallback((e: any) => {
+    console.log(e)
+    setNowFeeling(e)
+  }, [])
 
   useEffect(() => displayData(), [nowFeeling])
 
