@@ -9,7 +9,6 @@ import {
   Button,
   Text,
 } from "@mantine/core"
-import { formList, useForm } from "@mantine/form"
 import { Relation } from "../types/relation"
 
 export const ProposeFood: FC = () => {
@@ -114,9 +113,9 @@ export const ProposeFood: FC = () => {
 
   return (
     <>
-      <Text className='text-sky-400 m-4'>気分にあったオススメ料理</Text>
+      <Text className='m-4 text-sky-400'>気分にあったオススメ料理</Text>
       <Select
-        className='max-w-250px m-4'
+        className='m-4 max-w-250px'
         label='あなたの気分を選んでください'
         placeholder='ここをクリックして選択'
         data={selectFeeling}
@@ -128,7 +127,7 @@ export const ProposeFood: FC = () => {
 
       <Table
         striped
-        className='table-auto border-separate border-2 max-w-800px m-4'
+        className='border-separate border-2 m-4 max-w-800px table-auto'
       >
         <thead>
           <tr>
