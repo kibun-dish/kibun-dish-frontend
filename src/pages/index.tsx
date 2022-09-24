@@ -7,15 +7,6 @@ import { ProposeFood } from "../components/ProposeFood"
 const Home: NextPage = () => {
   return (
     <div>
-      <Head>
-        <title>気分dish</title>
-        <meta
-          name='description'
-          content='気分・状態で料理をオススメするサービス'
-        />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-
       <header></header>
 
       <main>
