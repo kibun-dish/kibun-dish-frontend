@@ -20,14 +20,18 @@ import { postApi } from "../utils/api"
 import { Feel } from "../types/feel"
 import { Food } from "../types/foo"
 import { Relation } from "../types/relation"
+import { useFeelApi } from "../hooks/feelAPI"
+import { useFoodApi } from "../hooks/foodApi"
 
 export const FeelFoodForm: FC = () => {
   const { data: foods, mutate: foodMutate } = useGetApi<Food[]>("/food")
   const { data: feels, mutate: feelMutate } = useGetApi<Feel[]>("/feel")
   const { data: relations2, mutate: relationsMutate } = useGetApi("/relation")
+  const { createFeel } = useFeelApi()
+  const { createFood } = useFoodApi()
   // console.log({ foods })
   // console.log(feels2)
-  console.log(relations2)
+  //console.log(relations2)
 
   // RelationのGET
   const relations: Relation[] = [
@@ -84,19 +88,19 @@ export const FeelFoodForm: FC = () => {
     formParams.reset()
   }, [formParams])
 
-  const onSubmitAddFeel = useCallback(() => {
+  const onSubmitAddFeel = useCallback(async () => {
     console.log("onSubmitAddFeel", feelForm.values)
-    postApi("/feel", feelForm)
-
+    // await postApi("/feel", { name: String(feelForm.values.name) })
+    createFeel(String(feelForm.values.name))
     feelForm.reset()
-  }, [feelForm])
+  }, [createFeel, feelForm])
 
-  const onSubmitAddFood = useCallback(() => {
+  const onSubmitAddFood = useCallback(async () => {
     console.log("onSubmitAddFeel", foodForm.values)
-    postApi("/food", foodForm)
-
+    // await postApi("/food", { name: String(foodForm.values.name) })
+    createFood(String(foodForm.values.name))
     foodForm.reset()
-  }, [foodForm])
+  }, [createFood, foodForm])
 
   return (
     <div>
