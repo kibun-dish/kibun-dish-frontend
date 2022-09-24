@@ -17,6 +17,7 @@ export const ProposeFood: FC = () => {
   const { data: relations2, mutate: relationsMutate } =
     useGetApi<Relation[]>("/relation")
   const { data: feels, mutate: feelMutate } = useGetApi<Feel[]>("/feel")
+  console.log({ feels })
 
   // const selectFeeling = feels.map(element => {
   //   return { value: element.id, label: element.name }
@@ -94,7 +95,7 @@ export const ProposeFood: FC = () => {
 
   return (
     <div className='mx-auto max-w-800px w-80vw'>
-      <Text className='m-4 text-sky-400'>気分にあったオススメ料理</Text>
+      <Text className='mb-4 text-20px'>気分にあったオススメ料理</Text>
       {feels && (
         <Select
           className='m-4 max-w-250px'

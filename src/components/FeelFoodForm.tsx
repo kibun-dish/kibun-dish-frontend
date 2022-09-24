@@ -3,6 +3,7 @@ import { useForm } from "@mantine/form"
 import {
   TextInput,
   Checkbox,
+  Text,
   Button,
   Group,
   Box,
@@ -19,11 +20,15 @@ import { postApi } from "../utils/api"
 import { Feel } from "../types/feel"
 import { Food } from "../types/foo"
 import { Relation } from "../types/relation"
+import { useFeelApi } from "../hooks/feelAPI"
+import { useFoodApi } from "../hooks/foodApi"
 
 export const FeelFoodForm: FC = () => {
   const { data: foods, mutate: foodMutate } = useGetApi<Food[]>("/food")
   const { data: feels, mutate: feelMutate } = useGetApi<Feel[]>("/feel")
   const { data: relations2, mutate: relationsMutate } = useGetApi("/relation")
+  const { createFeel } = useFeelApi()
+  const { createFood } = useFoodApi()
   // console.log({ foods })
   // console.log(feels2)
   //console.log(relations2)
@@ -79,27 +84,29 @@ export const FeelFoodForm: FC = () => {
 
   const onSubmit = useCallback(() => {
     console.log(formParams.values)
-    // postApi("/relation", formParams.values)
+    postApi("/relation", formParams.values)
     formParams.reset()
   }, [formParams])
 
-  const onSubmitAddFeel = useCallback(() => {
+  const onSubmitAddFeel = useCallback(async () => {
     console.log("onSubmitAddFeel", feelForm.values)
-    // postApi("/feels", feelForm)
-
+    // await postApi("/feel", { name: String(feelForm.values.name) })
+    createFeel(String(feelForm.values.name))
     feelForm.reset()
-  }, [feelForm])
+  }, [createFeel, feelForm])
 
-  const onSubmitAddFood = useCallback(() => {
+  const onSubmitAddFood = useCallback(async () => {
     console.log("onSubmitAddFeel", foodForm.values)
-    // postApi("/foods", foodForm)
-
+    // await postApi("/food", { name: String(foodForm.values.name) })
+    createFood(String(foodForm.values.name))
     foodForm.reset()
-  }, [foodForm])
+  }, [createFood, foodForm])
 
   return (
     <div>
       <Box className='max-w-800px w-80vw' mx='auto'>
+        <Text className='text-xl mb-4'>食事の記録</Text>
+
         <form onSubmit={formParams.onSubmit(onSubmit)}>
           <Grid>
             <Grid.Col sm={4}>
