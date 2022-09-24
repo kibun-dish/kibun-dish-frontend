@@ -12,6 +12,7 @@ import {
   Autocomplete,
   Input,
   Grid,
+  NumberInput,
 } from "@mantine/core"
 import { FC, useCallback, useState } from "react"
 import { postApi } from "../utils/api"
@@ -25,7 +26,7 @@ export const FeelFoodForm: FC = () => {
   const { data: relations2, mutate: relationsMutate } = useGetApi("/relation")
   // console.log({ foods })
   // console.log(feels2)
-  // console.log(relations2)
+  console.log(relations2)
 
   // RelationのGET
   const relations: Relation[] = [
@@ -51,6 +52,7 @@ export const FeelFoodForm: FC = () => {
     initialValues: {
       feel_id: 0,
       food_id: 0,
+      evaluation: 1,
     },
     validate: {
       feel_id: value => (value === 0 ? "気分を選択してください" : null),
@@ -77,7 +79,7 @@ export const FeelFoodForm: FC = () => {
 
   const onSubmit = useCallback(() => {
     console.log(formParams.values)
-    // postApi("/relations", formParams)
+    // postApi("/relation", formParams.values)
     formParams.reset()
   }, [formParams])
 
@@ -100,7 +102,7 @@ export const FeelFoodForm: FC = () => {
       <Box className='max-w-800px w-80vw' mx='auto'>
         <form onSubmit={formParams.onSubmit(onSubmit)}>
           <Grid>
-            <Grid.Col sm={5}>
+            <Grid.Col sm={4}>
               {feels && (
                 <Select
                   label='今日の気分'
@@ -112,7 +114,7 @@ export const FeelFoodForm: FC = () => {
                 />
               )}
             </Grid.Col>
-            <Grid.Col sm={5}>
+            <Grid.Col sm={4}>
               {foods && (
                 <Select
                   label='食べたもの'
@@ -124,6 +126,15 @@ export const FeelFoodForm: FC = () => {
                 />
               )}
             </Grid.Col>
+            <Grid.Col sm={2}>
+              <NumberInput
+                label='評価'
+                min={1}
+                max={5}
+                {...formParams.getInputProps("evaluation")}
+              />
+            </Grid.Col>
+
             <Grid.Col sm={2}>
               <Group position='right' mt={27}>
                 <Button type='submit'>Submit</Button>
