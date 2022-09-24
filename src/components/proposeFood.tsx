@@ -112,7 +112,7 @@ export const ProposeFood: FC = () => {
   // useEffect(() => rows(), [tableData])
 
   return (
-    <>
+    <div className='mx-auto max-w-800px w-80vw'>
       <Text className='m-4 text-sky-400'>気分にあったオススメ料理</Text>
       <Select
         className='m-4 max-w-250px'
@@ -145,6 +145,6 @@ export const ProposeFood: FC = () => {
           ))}
         </tbody>
       </Table>
-    </>
+    </div>
   )
 }
