@@ -26,7 +26,7 @@ export const FeelFoodForm: FC = () => {
   const { data: relations2, mutate: relationsMutate } = useGetApi("/relation")
   // console.log({ foods })
   // console.log(feels2)
-  console.log(relations2)
+  //console.log(relations2)
 
   // RelationのGET
   const relations: Relation[] = [
