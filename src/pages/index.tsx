@@ -2,7 +2,7 @@ import type { NextPage } from "next"
 import Head from "next/head"
 import { Button, Center, Group } from "@mantine/core"
 import { useGetApi } from "../hooks/useApi"
-import { ProposeFood } from "../components/proposeFood"
+import { ProposeFood } from "../components/ProposeFood"
 
 const Home: NextPage = () => {
   return (

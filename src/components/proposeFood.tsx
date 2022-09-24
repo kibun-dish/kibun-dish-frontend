@@ -126,7 +126,10 @@ export const ProposeFood: FC = () => {
         onChange={e => onChangeFeel(e)}
       />
 
-      <Table className='table-auto border-separate border-2 max-w-800px m-4'>
+      <Table
+        striped
+        className='table-auto border-separate border-2 max-w-800px m-4'
+      >
         <thead>
           <tr>
             <th>食べ物</th>
@@ -136,7 +139,7 @@ export const ProposeFood: FC = () => {
         <tbody>
           {/*  {createTable} */}
           {tableData.map(element => (
-            <tr key={element.food.name}>
+            <tr key={element.id}>
               <td>{element.food.name}</td>
               <td>{element.evaluation}</td>
             </tr>
