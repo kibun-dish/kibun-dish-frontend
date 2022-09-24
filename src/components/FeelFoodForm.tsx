@@ -29,29 +29,6 @@ export const FeelFoodForm: FC = () => {
   const { data: relations2, mutate: relationsMutate } = useGetApi("/relation")
   const { createFeel } = useFeelApi()
   const { createFood } = useFoodApi()
-  // console.log({ foods })
-  // console.log(feels2)
-  //console.log(relations2)
-
-  // RelationのGET
-  const relations: Relation[] = [
-    {
-      id: 1,
-      feel_id: 1,
-      food_id: 1,
-      evaluation: 5,
-      feel: { id: 1, name: "悲しい" },
-      food: { id: 1, name: "うどん" },
-    },
-    {
-      id: 2,
-      feel_id: 4,
-      food_id: 5,
-      evaluation: 5,
-      feel: { id: 4, name: "悲しい" },
-      food: { id: 5, name: "うどん" },
-    },
-  ]
 
   const formParams = useForm({
     initialValues: {
