@@ -14,7 +14,7 @@ export const Youtube = () => {
       <iframe
         id='player'
         width='300'
-        height='250'
+        height='200'
         src={"https://www.youtube.com/embed/" + "4WJS7iYZ3a8"}
         frameBorder='0'
         allowFullScreen

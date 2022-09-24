@@ -79,20 +79,20 @@ export const FeelFoodForm: FC = () => {
 
   const onSubmit = useCallback(() => {
     console.log(formParams.values)
-    // postApi("/relation", formParams.values)
+    postApi("/relation", formParams.values)
     formParams.reset()
   }, [formParams])
 
   const onSubmitAddFeel = useCallback(() => {
     console.log("onSubmitAddFeel", feelForm.values)
-    // postApi("/feels", feelForm)
+    postApi("/feel", feelForm)
 
     feelForm.reset()
   }, [feelForm])
 
   const onSubmitAddFood = useCallback(() => {
     console.log("onSubmitAddFeel", foodForm.values)
-    // postApi("/foods", foodForm)
+    postApi("/food", foodForm)
 
     foodForm.reset()
   }, [foodForm])
